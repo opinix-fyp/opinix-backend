@@ -4,6 +4,7 @@ import com.opinix.backend.dto.LoginRequest;
 import com.opinix.backend.dto.LoginResponse;
 import com.opinix.backend.dto.RegisterRequest;
 import com.opinix.backend.dto.UserResponse;
+import com.opinix.backend.model.Role;
 import com.opinix.backend.model.User;
 import com.opinix.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,8 @@ public class AuthService {
         user.setPasswordHash(request.getPassword()); //hash later after prototype success
         user.setFullName(request.getFullName());
         user.setActive(true);
+        user.setRole(Role.RESPONDENT); //default role, because everyone is a respondent unless youre an admin...
+        //TODO implement a way for us to set users as admin / allow admins to set other users as admin
 
         User savedUser = userRepository.save(user);
 
