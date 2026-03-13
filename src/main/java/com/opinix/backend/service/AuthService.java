@@ -24,7 +24,7 @@ public class AuthService {
 
         User user = new User();
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword()); //hash later after prototype success
+        user.setPasswordHash(request.getPassword()); //hash later after prototype success
         user.setFullName(request.getFullName());
         user.setActive(true);
 
@@ -40,7 +40,7 @@ public class AuthService {
     public LoginResponse login(LoginRequest request){
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        if(user == null || !user.getPassword().equals(request.getPassword())){
+        if(user == null || !user.getPasswordHash().equals(request.getPassword())){
             throw new RuntimeException("Invalid email or password"); //later can be changed to a custom exception
         }
 
