@@ -24,7 +24,7 @@ public class PollController {
     @PostMapping("/import")
     public PollDto importPoll(
             @RequestParam("file")MultipartFile file,
-            @RequestParam String title,
+            @RequestParam(defaultValue = "Imported Poll") String title,
             @RequestParam(defaultValue = "GOOGLE_FORMS") String source
         ) throws Exception {
             Poll poll = pollImportService.importFromCSV(title, source, file.getInputStream());
