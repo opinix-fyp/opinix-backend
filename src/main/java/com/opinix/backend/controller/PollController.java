@@ -10,6 +10,7 @@ import com.opinix.backend.service.PollSentimentService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/polls")
 public class PollController {

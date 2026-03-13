@@ -4,9 +4,11 @@ import com.opinix.backend.dto.UserResponse;
 import com.opinix.backend.model.Role;
 import com.opinix.backend.model.User;
 import com.opinix.backend.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UserService {
     private final UserRepository userRepository;
 
