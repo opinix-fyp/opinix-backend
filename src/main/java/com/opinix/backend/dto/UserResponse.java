@@ -1,7 +1,7 @@
 package com.opinix.backend.dto;
 
 public class UserResponse { //class for what returns after registration
-    private long id;
+    private Long id;
     private String email;
     private String fullName;
 
@@ -9,7 +9,7 @@ public class UserResponse { //class for what returns after registration
     public UserResponse(){}
 
     //getters
-    public long getId(){
+    public Long getId(){
         return id;
     }
     public String getEmail(){
@@ -20,7 +20,7 @@ public class UserResponse { //class for what returns after registration
     }
 
     //setters
-    public void setId(long id){
+    public void setId(Long id){
         this.id = id;
     }
     public void setEmail(String email){

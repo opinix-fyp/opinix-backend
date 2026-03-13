@@ -8,7 +8,7 @@ public class User {
     //initialization to link to database
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -19,6 +19,10 @@ public class User {
     @Column(nullable = false)
     private String fullName;
 
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER; //default role is USER
+    //NOTE: this role field is never used. there is no setter or getter for it. currently just here in case. when needed, will be used.
+
     private boolean active = true;
     //more fields can be added in later.. but rn idk what else to add
 
@@ -26,7 +30,7 @@ public class User {
     public User(){}
 
     //setters
-    public void setId(long id){
+    public void setId(Long id){
         this.id = id;
     }
 
@@ -46,7 +50,7 @@ public class User {
     }
 
     //getters
-    public long getId(){
+    public Long getId(){
         return id;
     }
     public String getEmail(){

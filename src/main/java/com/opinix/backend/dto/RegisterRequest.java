@@ -5,16 +5,27 @@ public class RegisterRequest {
     private String password;
     private String fullName;
 
-    //TODO getters and setters
     public String getPassword(){
         return password;
+    }
+
+    private void setPassword(String password){
+        this.password = password;
     }
 
     public String getEmail(){
         return email;
     }
 
+    private void setEmail(String email){
+        this.email = email;
+    }
+
     public String getFullName(){
         return fullName;
+    }
+
+    private void setFullName(String fullName){
+        this.fullName = fullName;
     }
 }
