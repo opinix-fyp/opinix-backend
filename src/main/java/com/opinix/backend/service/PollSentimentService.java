@@ -58,6 +58,6 @@ public class PollSentimentService {
 
         return sentimentClient.analyze(request); //this is subject to change based on the ML component... harish... get to work...
 
-        //todo continue ts...
+
     }
 }

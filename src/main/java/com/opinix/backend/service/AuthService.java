@@ -37,6 +37,8 @@ public class AuthService {
         response.setId(savedUser.getId());
         response.setEmail(savedUser.getEmail());
         response.setFullName(savedUser.getFullName());
+        response.setRole(savedUser.getRole());
+        response.setActive(savedUser.isActive());
         return response;
     }
 

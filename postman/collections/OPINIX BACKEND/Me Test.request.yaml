@@ -1,5 +1,7 @@
 $kind: http-request
 name: Me Test
-url: ""
+url: http://localhost:8080/api/users/me?email=test@example.com
 method: GET
-order: 4454838346335432
+queryParams:
+  email: test@example.com
+order: 4100281235829521

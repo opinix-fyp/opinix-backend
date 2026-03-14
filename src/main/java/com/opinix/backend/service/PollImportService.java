@@ -57,9 +57,6 @@ public class PollImportService {
                 poll.addResponse(response);
             }
             return pollRepository.save(poll);
-
-
-            // TODO debug ts and see if it works
         }
     }
     private List<PollQuestion> buildQuestions(Map<String, Integer> headerMap){

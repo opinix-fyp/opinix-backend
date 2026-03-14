@@ -1,5 +1,20 @@
 $kind: http-request
 name: Poll Import Test
-url: ""
-method: GET
-order: 4215965372176182
+url: http://localhost:8080/api/polls/import
+method: POST
+body:
+  type: formdata
+  content:
+    - type: file
+      key: file
+      src:
+        - /D:/Fayyadh/FayyadhWorkRelated/Capstone/opinix/opinix-backend/testing/capstone
+          test 1 - Sheet1.csv
+      description: ""
+      disabled: false
+    - type: text
+      key: title
+      value: Test Import
+      description: ""
+      disabled: false
+order: 4399295036345058
