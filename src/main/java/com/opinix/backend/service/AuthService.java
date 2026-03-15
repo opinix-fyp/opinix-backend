@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
 
+    //TODO: implement forgot password functionality
+    //TODO: if we implement google api, we could impliment email verification.
+
     private final UserRepository userRepository;
 
     public AuthService(UserRepository userRepository){ //constructor
