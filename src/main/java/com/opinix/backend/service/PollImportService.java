@@ -1,9 +1,5 @@
 package com.opinix.backend.service;
 
-import com.opinix.backend.model.*;
-import com.opinix.backend.repository.PollRepository;
-import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,6 +11,15 @@ import java.util.Map;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.stereotype.Service;
+
+import com.opinix.backend.model.Poll;
+import com.opinix.backend.model.PollAnswer;
+import com.opinix.backend.model.PollQuestion;
+import com.opinix.backend.model.PollResponse;
+import com.opinix.backend.model.QuestionRole;
+import com.opinix.backend.model.QuestionType;
+import com.opinix.backend.repository.PollRepository;
 
 @Service
 public class PollImportService {
@@ -108,20 +113,34 @@ public class PollImportService {
     }
 
     private QuestionRole detectRole(String header, QuestionType type){
-        String h = header.toLowerCase();
+        String h = header == null ? "" : header.trim().toLowerCase();
 
-        if(type == QuestionType.TIMESTAMP || h.contains("name") || h.contains("id") || h.contains("email") || h.contains("phone")){ //these are clear metadata examples, but theres gonna be more...
+        // explicit metadata fields only
+        if (type == QuestionType.TIMESTAMP
+                || h.equals("name")
+                || h.equals("full name")
+                || h.contains("email")
+                || h.contains("phone")
+                || h.equals("id")
+                || h.contains("student id")
+                || h.contains("matric id")
+                || h.contains("employee id")) {
             return QuestionRole.METADATA;
         }
 
-        if (h.contains("consent") || h.contains("agree") || h.contains("updates") || h.contains("newsletter")) {
+        // explicit ignore fields
+        if (h.contains("consent")
+                || h.contains("agree")
+                || h.contains("updates")
+                || h.contains("newsletter")) {
             return QuestionRole.IGNORE;
         }
 
-        if (type == QuestionType.RATING || type == QuestionType.CHOICE || type == QuestionType.TEXT){
+        // open-ended or analyzable fields
+        if (type == QuestionType.TEXT || type == QuestionType.RATING || type == QuestionType.CHOICE) {
             return QuestionRole.FEEDBACK;
-        } //i know this is redundant, but we just keep it just in case...
+        }
 
-        return QuestionRole.FEEDBACK; //default to feedback, because we want to be as inclusive as possible with the ml parsing, we can always change the role later if we want to ignore some questions
+        return QuestionRole.FEEDBACK;
     }
 }

@@ -1,0 +1,5 @@
+$kind: http-request
+name: ML Health
+url: http://localhost:8000/health
+method: GET
+order: 4474467707636915

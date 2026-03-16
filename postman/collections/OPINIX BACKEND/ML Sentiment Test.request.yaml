@@ -1,0 +1,40 @@
+$kind: http-request
+name: ML Sentiment Test
+url: http://localhost:8000/sentiment
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"pollId\": 1,\r
+
+    \  \"items\": [\r
+
+    \    {\r
+
+    \      \"responseId\": 101,\r
+
+    \      \"questionId\": 11,\r
+
+    \      \"questionLabel\": \"Feedback\",\r
+
+    \      \"text\": \"The event was amazing\"\r
+
+    \    },\r
+
+    \    {\r
+
+    \      \"responseId\": 102,\r
+
+    \      \"questionId\": 11,\r
+
+    \      \"questionLabel\": \"Feedback\",\r
+
+    \      \"text\": \"The queue was too long\"\r
+
+    \    }\r
+
+    \  ]\r
+
+    }"
+order: 4491355324162444

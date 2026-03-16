@@ -1,14 +1,14 @@
 package com.opinix.backend.client;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.opinix.backend.dto.SentimentInputItem;
 import com.opinix.backend.dto.SentimentRequest;
 import com.opinix.backend.model.SentimentItemResult;
 import com.opinix.backend.model.SentimentResult;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @org.springframework.context.annotation.Profile("mock") //so that this is used when we are testing it out. when harish gets his work done, we switch to ml profile
@@ -43,6 +43,7 @@ public class MockClient implements SentimentClient{
             results.add(itemResult);
         }
 
-        return new SentimentResult(request.getPollId(), results);
+        String summary = "This is a mock summary. Replace with actual summary from ML model.";
+        return new SentimentResult(request.getPollId(), results, summary);
     }
 }

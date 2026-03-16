@@ -6,12 +6,15 @@ public class SentimentResult {
     private Long pollId;
     private List<SentimentItemResult> results;
 
+    private String summary;
+
     public SentimentResult() {
     }
 
-    public SentimentResult(Long pollId, List<SentimentItemResult> results) {
+    public SentimentResult(Long pollId, List<SentimentItemResult> results, String summary) {
         this.pollId = pollId;
         this.results = results;
+        this.summary = summary;
     }
 
     public Long getPollId() {
@@ -28,5 +31,13 @@ public class SentimentResult {
 
     public void setResults(List<SentimentItemResult> results) {
         this.results = results;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 }
