@@ -1,0 +1,26 @@
+# version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: opinix-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: OpinixRoot123!
+      MYSQL_DATABASE: opinix_db
+      MYSQL_USER: opinix_user
+      MYSQL_PASSWORD: MyStrongPass123!
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ../opinix-database/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pOpinixRoot123!"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysql_data:

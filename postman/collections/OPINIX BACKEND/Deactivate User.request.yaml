@@ -1,6 +1,6 @@
 $kind: http-request
 name: Deactivate User
-url: http://localhost:8080/api/users/3/active
+url: http://localhost:8080/api/users/2/active
 method: PATCH
 body:
   type: json

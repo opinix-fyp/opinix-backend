@@ -6,7 +6,7 @@ spring:
     active: mock
 
   datasource:
-    url: jdbc:mysql://localhost:3306/opinix_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kuala_Lumpur
+    url: jdbc:mysql://localhost:3307/opinix_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kuala_Lumpur
     username: opinix_user
     password: "MyStrongPass123!"
     driver-class-name: com.mysql.cj.jdbc.Driver

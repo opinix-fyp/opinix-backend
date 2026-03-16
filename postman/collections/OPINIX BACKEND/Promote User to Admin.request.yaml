@@ -1,6 +1,6 @@
 $kind: http-request
 name: Promote User to Admin
-url: http://localhost:8080/api/users/2/role
+url: http://localhost:8080/api/users/1/role
 method: PATCH
 body:
   type: json
