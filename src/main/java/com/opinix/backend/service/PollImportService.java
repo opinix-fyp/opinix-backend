@@ -112,35 +112,95 @@ public class PollImportService {
         }
     }
 
-    private QuestionRole detectRole(String header, QuestionType type){
-        String h = header == null ? "" : header.trim().toLowerCase();
+  private QuestionRole detectRole(String header, QuestionType type) {
+    String h = header == null ? "" : header.trim().toLowerCase();
 
-        // explicit metadata fields only
-        if (type == QuestionType.TIMESTAMP
-                || h.equals("name")
-                || h.equals("full name")
-                || h.contains("email")
-                || h.contains("phone")
-                || h.equals("id")
-                || h.contains("student id")
-                || h.contains("matric id")
-                || h.contains("employee id")) {
-            return QuestionRole.METADATA;
-        }
+    // 1. METADATA (identity / demographic / admin)
+    boolean isMetadata =
+            type == QuestionType.TIMESTAMP
+            || h.equals("name")
+            || h.equals("full name")
+            || h.contains("email")
+            || h.contains("phone")
+            || h.equals("respondent id")
+            || h.equals("id")
+            || h.equals("age")
+            || h.equals("age range")
+            || h.equals("gender")
+            || h.equals("role")
+            || h.equals("role / affiliation")
+            || h.equals("faculty")
+            || h.equals("department")
+            || h.equals("faculty / department")
+            || h.equals("course")
+            || h.equals("class")
+            || h.equals("section")
+            || h.equals("year")
+            || h.equals("year of study")
+            || h.equals("location")
+            || h.equals("poll title")
+            || h.equals("event attended")
+            || h.equals("attendance mode")
+            || h.contains("student id")
+            || h.contains("matric id")
+            || h.contains("employee id")
+            || h.contains("respondent id");
 
-        // explicit ignore fields
-        if (h.contains("consent")
-                || h.contains("agree")
-                || h.contains("updates")
-                || h.contains("newsletter")) {
-            return QuestionRole.IGNORE;
-        }
+    if (isMetadata) {
+        return QuestionRole.METADATA;
+    }
 
-        // open-ended or analyzable fields
-        if (type == QuestionType.TEXT || type == QuestionType.RATING || type == QuestionType.CHOICE) {
-            return QuestionRole.FEEDBACK;
-        }
+    // 2. STRUCTURED QUESTIONS → IGNORE (even if TEXT)
+    boolean isStructured =
+            h.contains("(1-5)")
+            || h.contains("(1 to 5)")
+            || h.contains("rate")
+            || h.contains("rating")
+            || h.contains("satisfied")
+            || h.contains("satisfaction")
+            || h.contains("how likely")
+            || h.contains("likelihood")
+            || h.contains("how did you hear")
+            || h.contains("would you attend")
+            || h.contains("recommend")
+            || h.contains("scale")
+            || h.contains("score");
 
+    if (isStructured) {
+        return QuestionRole.IGNORE;
+    }
+
+    // 3. TRUE FEEDBACK (open-ended)
+    boolean isFeedback =
+            h.contains("feedback")
+            || h.contains("comment")
+            || h.contains("comments")
+            || h.contains("suggestion")
+            || h.contains("suggestions")
+            || h.contains("review")
+            || h.contains("opinion")
+            || h.contains("thought")
+            || h.contains("experience")
+            || h.contains("what did you like")
+            || h.contains("what did you enjoy")
+            || h.contains("what went well")
+            || h.contains("what could we improve")
+            || h.contains("what can we improve")
+            || h.contains("what did you dislike")
+            || h.contains("anything else")
+            || h.contains("additional feedback")
+            || h.contains("additional comments");
+
+    if (isFeedback) {
         return QuestionRole.FEEDBACK;
     }
+
+    // 4. SAFE DEFAULT
+    // Only generic TEXT fields become feedback
+    if (type == QuestionType.TEXT) {
+        return QuestionRole.FEEDBACK;
+    }
+
+    return QuestionRole.IGNORE;
+}
 }
