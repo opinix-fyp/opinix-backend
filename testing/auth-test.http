@@ -1,0 +1,31 @@
+### Registring new user
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "12345678",
+  "fullName": "Test User"
+}
+
+###
+
+### Logging in with that user
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "12345678"
+}
+
+###
+
+### Try logging in with wrong password (expected to fail)
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "wrongpassword"
+}

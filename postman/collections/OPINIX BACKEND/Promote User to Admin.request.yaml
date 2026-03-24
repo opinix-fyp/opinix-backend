@@ -1,0 +1,8 @@
+$kind: http-request
+name: Promote User to Admin
+url: http://localhost:8080/api/users/1/role
+method: PATCH
+body:
+  type: json
+  content: "{\r\n    \"role\": \"ADMIN\"\r\n}"
+order: 4274758547909601

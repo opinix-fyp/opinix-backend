@@ -1,0 +1,7 @@
+$kind: http-request
+name: Me Test
+url: http://localhost:8080/api/users/me?email=test@example.com
+method: GET
+queryParams:
+  email: test@example.com
+order: 4100281235829521

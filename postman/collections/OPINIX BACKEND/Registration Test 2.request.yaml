@@ -1,0 +1,16 @@
+$kind: http-request
+name: Registration Test 2
+url: http://localhost:8080/api/auth/register
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"fullName\": \"Second User Test\",\r
+
+    \    \"email\": \"user2@opinix.com\",\r
+
+    \    \"password\": \"password123\"\r
+
+    }"
+order: 317101540467056

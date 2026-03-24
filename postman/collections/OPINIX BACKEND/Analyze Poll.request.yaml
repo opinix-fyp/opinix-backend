@@ -1,0 +1,5 @@
+$kind: http-request
+name: Analyze Poll
+url: http://localhost:8080/api/polls/4/analyze
+method: POST
+order: 4432990981197786
